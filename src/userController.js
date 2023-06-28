@@ -129,31 +129,39 @@ function validateEmail(email) {
 
 var loginUser = async (req, res) => {
   try {
-    console.log('request');
-    let { emailid, password } = req.body;
-    console.log(req.body, 'body');
-    console.log(emailid, 'email');
+    // console.log('request');
+    // let { emailid, password } = req.body;
+    // console.log(req.body, 'body');
+    // console.log(emailid, 'email');
 
-    const products = await Users.findOne({ 'emailid': emailid });
+    // const products = await Users.findOne({ 'emailid': emailid });
     
-    if (products) {
-      const hash = await bcrypt.hash(password, 10);
-      console.log('hashed password', hash);
+    // if (products) {
+    //   const hash = await bcrypt.hash(password, 10);
+    //   console.log('hashed password', hash);
 
-      if (await bcrypt.compare(password, products.password)) {
-        res.status(200).json({ loggedin: 'true' });
-      } else {
-        res.status(400).send("Wrong Password");
-      }
-    } else {
-      console.log('pro', products);
-      res.status(201).send('User Already Registered Please Login');
-    }
+    //   if (await bcrypt.compare(password, products.password)) {
+    //     res.status(200).json({ loggedin: 'true' });
+    //   } else {
+    //     res.status(400).send("Wrong Password");
+    //   }
+    // } else {
+    //   console.log('pro', products);
+    //   res.status(201).send('User Already Registered Please Login');
+    // }
+    res.status(200).json({ loggedin: 'true', redirect:"/main" });
+
   } catch (err) {
     console.log(err);
     res.status(500).send("An Error Occurred");
   }
 };
+
+
+// var logOut = async (req, res) => {
+//   res.clearCookie(req.cookies); // Replace 'cookieName' with the actual name of your cookie
+//   res.json({ redirect: '/login' });
+// }
 
 
 
